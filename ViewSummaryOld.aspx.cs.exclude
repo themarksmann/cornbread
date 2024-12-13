@@ -1,0 +1,108 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Text;
+using System.Text.RegularExpressions;
+using Typical.Data;
+
+public partial class ViewSummaryOld : System.Web.UI.Page
+{
+    protected string cnStr = System.Configuration.ConfigurationManager.ConnectionStrings["CharDoc3"].ConnectionString;
+   
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        FormView1.ItemInserting += new FormViewInsertEventHandler(FormView1_ItemInserting);
+        FormView1.ItemUpdating += new FormViewUpdateEventHandler(FormView1_ItemUpdating);
+        if (Request.QueryString["id"] == null)
+        {
+            this.FormView1.ChangeMode(FormViewMode.Insert);
+            
+
+            
+        }
+        else
+        {
+            string words;
+            if (Session["highlight_words"] == null)
+            {
+                words = String.Empty;
+            }
+            else
+            {
+                words = (string)Session["highlight_words"];
+            }
+            string pat;
+            pat = @"("".*?""|[0-9a-zA-Z]+)";
+            //pat = @""".+?""|[0-9a-zA-Z]+";
+            RegexOptions options = RegexOptions.IgnoreCase;
+            Regex regex = new Regex(pat, options);
+            string[] results = regex.Split(words);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < results.Length; i++)
+            {
+                if ((results[i] != " ") && (results[i].Trim() != String.Empty)
+                     && (results[i].Trim().ToUpper() != "OR") && (results[i].Trim().ToUpper() != "AND")
+                    && (results[i].Trim().ToUpper() != "NOT"))
+                {
+                    sb.AppendLine("  highlight('" + results[i].Trim().Replace("\"", "") + "');");
+                }
+
+            }
+            lblSearchWords.Text = sb.ToString();
+
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "highlite", sb.ToString(), true);
+        }
+    }
+
+    void FormView1_ItemUpdating(object sender, FormViewUpdateEventArgs e)
+    {
+        System.Collections.Specialized.IOrderedDictionary dic = e.NewValues;
+        StringBuilder sb = new StringBuilder();
+        int ct = dic.Keys.Count;
+        IDictionaryEnumerator ide = dic.GetEnumerator();
+        while (ide.MoveNext())
+        {
+            sb.AppendLine(ide.Key.ToString() + ":" + ide.Value.ToString() + "<br />");
+        }
+
+
+
+        Response.Write(ct + "<br />");
+        Response.Write(sb.ToString());
+
+        //e.Cancel = true;
+        
+        //throw new Exception("The method or operation is not implemented.");
+    }
+
+    void FormView1_ItemInserting(object sender, FormViewInsertEventArgs e)
+    {
+        System.Collections.Specialized.IOrderedDictionary dic = e.Values;
+        StringBuilder sb = new StringBuilder();
+        int ct = dic.Keys.Count;
+        IDictionaryEnumerator ide = dic.GetEnumerator();
+        while (ide.MoveNext())
+        {
+            sb.AppendLine(ide.Key.ToString() + ":" + ide.Value.ToString() + "<br />");
+        }
+
+
+
+        Response.Write(ct + "<br />");
+        Response.Write(sb.ToString());
+
+        e.Cancel = true;
+        //throw new Exception("The method or operation is not implemented.");
+    }
+
+
+   
+}

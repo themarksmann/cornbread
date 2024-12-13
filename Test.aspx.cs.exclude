@@ -1,0 +1,41 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using Typical.Data;
+
+public partial class Test : System.Web.UI.Page
+{
+    protected string cnStr = System.Configuration.ConfigurationManager.ConnectionStrings["CharDoc3"].ConnectionString;
+   
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+
+        SqlDataAction dact = new SqlDataAction(cnStr);
+        SqlBuilderChardoc sbc = new SqlBuilderChardoc();
+        string stmt = "SELECT DESCRIPTORS FROM tblCharDoc";
+        txtDebug.Text = stmt;
+        dact.OpenConnection();
+        //string stmt = String.Format("SELECT * FROM vw_CharDoc WHERE [Author] LIKE '%{0}%' ORDER BY Author", txtSearch.Text);
+        dsResults = dact.ExecuteDataSet(stmt);
+        this.ViewState["results"] = dsResults;
+
+        dact.CloseConnection();
+        dact = null;
+
+
+
+
+
+
+
+
+    }
+}

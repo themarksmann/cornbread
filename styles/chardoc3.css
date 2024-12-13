@@ -1,0 +1,117 @@
+﻿body 
+{
+    font-family: 'Arial', sans-serif;
+	font-size: 9pt;
+	text-align: center;	
+    margin: 0px 15px;
+    background-color: #FFF;
+}
+div
+{
+
+}
+table 
+{
+	font-size: 9pt;
+    /* font-family: Tahoma,Arial,sans-serif; */
+}
+
+td
+{
+	font-size: 9pt;
+    /* font-family: Tahoma,Arial,sans-serif; */
+}
+h1
+{
+	margin: 0px;
+	font-size: 14pt; 
+	color: #006600;
+	padding-top: .5em;
+	padding-bottom: .17em;	
+}
+h2
+{
+	margin: 0px;
+	font-size: 12pt;
+	color: #990000;
+	padding-top: .5em;
+	padding-bottom: .17em;	
+}
+h3, h4, h5, h6
+{
+	margin: 0px;
+	padding-top: .5em;
+	padding-bottom: .17em;
+    /* font-family: Tahoma,Arial,sans-serif; */
+}
+p 
+{
+	margin: .4em 0px .5em 0px;
+	line-height: 1.5em;
+}
+a 
+{
+	font-family: 'Arial', san-serif;
+}
+a:hover
+{
+	color: #060;
+	font-family: 'Arial', san-serif;
+}
+a:visited 
+{
+	color: #909;
+	font-family: 'Arial', san-serif;
+}
+
+
+input, textarea, select
+{
+    font-family: 'Arial', sans-serif;
+	font-size: 8pt;	
+}
+.brokenLink
+{
+	text-decoration: line-through;
+}
+
+.hideme
+{
+	visibility: hidden;
+}
+
+#sectionMain
+{
+	text-align:left;
+	width: 770px;
+}
+.appTitle
+{
+	/* background-color: #900; 
+	background-color: #C00; */
+	background-color: #CC0033;
+	color:#FFF;
+	font-size: 24px;
+	padding: 2px;
+	
+}
+.screenTitle
+{
+	background-color: #000;
+	color:#FFF;
+	font-size: 12px;
+	padding: 2px;
+}
+.hit
+{
+	background-color: #FF0;
+}
+.sbutton
+{
+	width: 120px;
+	margin: 2px;
+}
+.bRight
+{
+	float:right;
+}

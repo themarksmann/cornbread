@@ -1,0 +1,234 @@
+<%@ Page Language="C#" AutoEventWireup="true" Debug="true" ValidateRequest="false" CodeFile="ViewSummaryOld.aspx.cs" Inherits="ViewSummaryOld" %>
+
+<%@ Register Src="CtrlBanner.ascx" TagName="CtrlBanner" TagPrefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="styles/chardoc3.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="scripts/prototype.js"></script> 
+    <script type="text/javascript">
+function highlight(strHigh) { 
+  var r
+  var i
+  if(strHigh) {
+    r=document.body.createTextRange();
+    for(i=0;r.findText(strHigh);i++) {
+      r.execCommand('BackColor','','silver');
+      r.collapse(false);
+    }
+  }
+}
+
+function test()
+{
+
+    try
+    {
+    $('FormView1_txtAccNum').value = 'F00001';
+    $('FormView1_txtTitle').value = 'This is a fake title';
+    $('FormView1_txtAuthor').value = 'LEFEVRE M J';
+    $('FormView1_txtDocDate').value = '1/1/2007';
+    $('FormView1_txtDocNum').value = 'F00-231';
+    $('FormView1_txtDocYear').value = '2007';
+    $('FormView1_txtDocType').value = 'Fake';
+    $('FormView1_txtCompSource').value = 'INVISTA';
+    $('FormView1_txtLoc').value = 'Charlotte';
+    $('FormView1_txtAbstract').value = 'Polyester is a category of polymers, ' +
+        'or, more specifically condensation polymers, ' + 
+        'which contain the ester functional group in their main chain. Usually, polyester refers ' +
+        'to cloth woven from polyester fiber. Polyester clothing is generally considered ' +
+        'to have a "less natural" feeling to it compared to natural fibers. Polyester ' +
+        'fibers are often spun together with fibers of cotton, producing a cloth with some' +
+        'of the better properties of each.';
+     $('FormView1_txtDescriptors').value = 'Polyester ; INVISTA';
+     }
+     catch(e)
+     {
+     
+     }
+     
+    //alert('done');
+    //$('FormView1$txtAcc').value = 'F00001';
+}
+    
+    </script>
+</head>
+<body onload="test();">
+    <form id="form1" runat="server">
+    <div id="sectionMain">
+        <uc1:CtrlBanner ID="CtrlBanner1" runat="server" ScreenName="View Summary" />
+    <a href="javascript:window.history.go(-1);">Go back one page</a><br />
+        <br />
+        <div style="float:right">
+            &nbsp;</div>
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="DOCUMENT_ID" DataSourceID="SqlDataSource1"
+            Width="95%">
+            <EditItemTemplate>
+                                             <div style="width:95%">
+                ACCESSION_NUMBER:
+                <asp:TextBox ID="txtAccNum" runat="server" Text='<%# Eval("ACCESSION_NUMBER") %>'>
+                </asp:TextBox><br />
+                TITLE:<br />
+                <asp:TextBox ID="txtTitle" runat="server" Text='<%# Eval("title") %>' Width="640px"></asp:TextBox><br />
+                AUTHOR:<br />
+                <asp:TextBox ID="txtAuthor" runat="server" Text='<%# Eval("author") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_NUMBER:<br />
+                <asp:TextBox ID="txtDocNum" runat="server" Text='<%# Eval("document_number") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_DATE:<br />
+                <asp:TextBox ID="txtDocDate" runat="server" Text='<%# Eval("document_date") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_YEAR:<br />
+                <asp:TextBox ID="txtDocYear" runat="server" Text='<%# Eval("document_year") %>' Width="640px"></asp:TextBox><br />
+                COMPANY_SOURCE:<br />
+                <asp:TextBox ID="txtCompSource" runat="server" Text='<%# Eval("company_source") %>' Width="640px"></asp:TextBox><br />
+                LOCATION:<br />
+                <asp:TextBox ID="txtLoc" runat="server" Text='<%# Eval("location") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_TYPE:<br />
+                <asp:TextBox ID="txtDocType" runat="server" Text='<%# Eval("document_type") %>' Width="640px"></asp:TextBox><br />
+                ABSTRACT:<br />
+                <asp:TextBox ID="txtAbstract" runat="server" Text='<%# Eval("abstract") %>' Rows="7" TextMode="MultiLine" Width="640px"></asp:TextBox><br />
+                DESCRIPTORS:<br />
+                <asp:TextBox ID="txtDescriptors" runat="server" Text='<%# Eval("descriptors") %>' Rows="7" TextMode="MultiLine" Width="640px"></asp:TextBox><br />
+<br />
+<br />
+  
+ 
+                <asp:Button ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
+                    Text="Update" CssClass="sbutton">
+                </asp:Button>
+                <asp:Button ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
+                    Text="Cancel" CssClass="sbutton">
+                </asp:Button></div>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+         
+                                    <div style="width:95%">
+                ACCESSION_NUMBER:
+                <asp:TextBox ID="txtAccNum" runat="server" Text='<%# Bind("accnum") %>'>
+                </asp:TextBox><br />
+                TITLE:<br />
+                <asp:TextBox ID="txtTitle" runat="server" Text='<%# Bind("title") %>' Width="640px"></asp:TextBox><br />
+                AUTHOR:<br />
+                <asp:TextBox ID="txtAuthor" runat="server" Text='<%# Bind("author") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_NUMBER:<br />
+                <asp:TextBox ID="txtDocNum" runat="server" Text='<%# Bind("docnum") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_DATE:<br />
+                <asp:TextBox ID="txtDocDate" runat="server" Text='<%# Bind("docdate") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_YEAR:<br />
+                <asp:TextBox ID="txtDocYear" runat="server" Text='<%# Bind("docyear") %>' Width="640px"></asp:TextBox><br />
+                COMPANY_SOURCE:<br />
+                <asp:TextBox ID="txtCompSource" runat="server" Text='<%# Bind("comp_source") %>' Width="640px"></asp:TextBox><br />
+                LOCATION:<br />
+                <asp:TextBox ID="txtLoc" runat="server" Text='<%# Bind("loc") %>' Width="640px"></asp:TextBox><br />
+                DOCUMENT_TYPE:<br />
+                <asp:TextBox ID="txtDocType" runat="server" Text='<%# Bind("doctype") %>' Width="640px"></asp:TextBox><br />
+                ABSTRACT:<br />
+                <asp:TextBox ID="txtAbstract" runat="server" Text='<%# Bind("abstract") %>' Rows="7" TextMode="MultiLine" Width="640px"></asp:TextBox><br />
+                DESCRIPTORS:<br />
+                <asp:TextBox ID="txtDescriptors" runat="server" Text='<%# Bind("descriptors") %>' Rows="7" TextMode="MultiLine" Width="640px"></asp:TextBox><br />
+<br />
+<br />
+                <asp:Button ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert"
+                    Text="Insert">
+                </asp:Button>
+                <asp:Button ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
+                    Text="Cancel">
+                </asp:Button></div>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                        <div style="width:95%">
+                <div style="float:right">
+                <asp:HyperLink ID="hlUrl" runat="server" Text="Display Image" NavigateUrl='<%# Eval("URL") %>' 
+                Visible='<%# Convert.ToBoolean(Eval("URL").ToString().Length) %>'  />
+                </div>
+                <br />
+                <asp:Label ID="DOCUMENT_IDLabel" runat="server" Text='<%# Eval("DOCUMENT_ID") %>'
+                    Visible="False"></asp:Label><br />
+                <strong>Accession Number:</strong>
+                <asp:Label ID="ACCESSION_NUMBERLabel" runat="server" Text='<%# Eval("ACCESSION_NUMBER") %>'></asp:Label><br />
+                <strong>Title:</strong>
+                <asp:Label ID="TITLELabel" runat="server" Text='<%# Eval("TITLE") %>'></asp:Label><br />
+                <strong>Author:</strong>
+                <asp:Label ID="AUTHORLabel" runat="server" Text='<%# Eval("AUTHOR") %>'></asp:Label><br />
+                <strong>Document Number:</strong>
+                <asp:Label ID="DOCUMENT_NUMBERLabel" runat="server" Text='<%# Eval("DOCUMENT_NUMBER") %>'></asp:Label><br />
+                <strong>Document Date:</strong>
+                <asp:Label ID="DOCUMENT_DATELabel" runat="server" Text='<%# Eval("DOCUMENT_DATE") %>'></asp:Label><br />
+                <strong>Document Year:</strong>
+                <asp:Label ID="DOCUMENT_YEARLabel" runat="server" Text='<%# Eval("DOCUMENT_YEAR") %>'></asp:Label><br />
+                <strong>Company Source:</strong>
+                <asp:Label ID="COMPANY_SOURCELabel" runat="server" Text='<%# Eval("COMPANY_SOURCE") %>'></asp:Label><br />
+                <strong>Author Location:</strong>
+                <asp:Label ID="LOCATIONLabel" runat="server" Text='<%# Eval("LOCATION") %>'></asp:Label><br />
+                <strong>Document Type:</strong>
+                <asp:Label ID="DOCUMENT_TYPELabel" runat="server" Text='<%# Eval("DOCUMENT_TYPE") %>'></asp:Label><br />
+                <strong>Abstract:</strong>
+                <asp:Label ID="ABSTRACTLabel" runat="server" Text='<%# Eval("ABSTRACT") %>'></asp:Label><br />
+                <strong>Descriptors:</strong>
+                <asp:Label ID="DESCRIPTORSLabel" runat="server" Text='<%# Eval("DESCRIPTORS") %>'></asp:Label><br />
+                <br />
+                <br />
+                <asp:Button ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit"
+                    Text="Edit" CssClass="sbutton"></asp:Button>
+                <!-- ID="DeleteButton" CausesValidation="False" CommandName="Delete"
+                    Text="Delete" -->
+                <asp:Button ID="NewButton" runat="server" CausesValidation="False" CommandName="New"
+                    Text="New" CssClass="sbutton"></asp:Button></div>
+            </ItemTemplate>
+        </asp:FormView>
+        <br />
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CharDoc3 %>"
+            DeleteCommand="DELETE FROM [tblChardoc] WHERE [DOCUMENT_ID] = @DOCUMENT_ID" InsertCommand="sp_chardoc_InsertArticle"
+            SelectCommand="SELECT * FROM [vw_chardoc_MainFull] WHERE ([ACCESSION_NUMBER] = @ACCESSION_NUMBER)"
+            UpdateCommand="sp_chardoc_UpdateArticle" UpdateCommandType="StoredProcedure" InsertCommandType="StoredProcedure">
+            <DeleteParameters>
+                <asp:Parameter Name="DOCUMENT_ID" Type="Int32" />
+            </DeleteParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="accession_number" Type="String" />
+                <asp:Parameter Name="TITLE" Type="String" />
+                <asp:Parameter Name="AUTHOR" Type="String" />
+                <asp:Parameter Name="document_number" Type="String" />
+                <asp:Parameter Name="document_date" Type="String" />
+                <asp:Parameter Name="document_year" Type="Int32" />
+                <asp:Parameter Name="company_source" Type="String" />
+                <asp:Parameter Name="location" Type="String" />
+                <asp:Parameter Name="document_type" Type="String" />
+                <asp:Parameter Name="DESCRIPTORS" Type="String" />
+                <asp:Parameter Name="ABSTRACT" Type="String" />
+            </UpdateParameters>
+            <SelectParameters>
+                <asp:QueryStringParameter DefaultValue="1" Name="ACCESSION_NUMBER" QueryStringField="id"
+                    Type="String" />
+            </SelectParameters>
+            <InsertParameters>
+                <asp:Parameter Name="accnum" Type="String" />
+                <asp:Parameter Name="TITLE" Type="String" />
+                <asp:Parameter Name="AUTHOR" Type="String" />
+                <asp:Parameter Name="docnum" Type="String" />
+                <asp:Parameter Name="docdate" Type="String" />
+                <asp:Parameter Name="docyear" Type="Int32" />
+                <asp:Parameter Name="comp_source" Type="String" />
+                <asp:Parameter Name="loc" Type="String" />
+                <asp:Parameter Name="doctype" Type="String" />
+                <asp:Parameter Name="DESCRIPTORS" Type="String" />
+                <asp:Parameter Name="ABSTRACT" Type="String" />
+            </InsertParameters>
+        </asp:SqlDataSource>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    
+    </div>
+        <asp:Label ID="lblSearchWords" runat="server" BackColor="Black" ForeColor="Yellow"
+            Text="lblSearchWords"></asp:Label>
+ 
+    </form>
+</body>
+</html>
